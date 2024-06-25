@@ -25,22 +25,24 @@ if (!container) {
 
 container.className = 'bundle-namespace';
 
-ReactDOM.createRoot(container).render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <GlobalProvider>
-        <CustomStyleProvider>
-          <LangWrapper>
-            <B3StoreContainer>
-              <DynamicallyVariableProvider>
-                <B3ThemeProvider>
-                  <App />
-                </B3ThemeProvider>
-              </DynamicallyVariableProvider>
-            </B3StoreContainer>
-          </LangWrapper>
-        </CustomStyleProvider>
-      </GlobalProvider>
-    </PersistGate>
-  </Provider>,
-);
+export const reactApp = async () => {
+  return ReactDOM.createRoot(container).render(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <GlobalProvider>
+          <CustomStyleProvider>
+            <LangWrapper>
+              <B3StoreContainer>
+                <DynamicallyVariableProvider>
+                  <B3ThemeProvider>
+                    <App />
+                  </B3ThemeProvider>
+                </DynamicallyVariableProvider>
+              </B3StoreContainer>
+            </LangWrapper>
+          </CustomStyleProvider>
+        </GlobalProvider>
+      </PersistGate>
+    </Provider>,
+  );
+};

@@ -2,6 +2,7 @@
   "exclude": ["node_modules"],
   "extends": "@b3/tsconfig/vite.json",
   "compilerOptions": {
+    "jsx": "react",
     "baseUrl": "./",
     "outDir": "dist",
     "paths": {

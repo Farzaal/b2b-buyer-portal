@@ -4,10 +4,13 @@ const { VITE_LOCAL_DEBUG } = import.meta.env;
 
 const generateBcUrl = () => {
   if (VITE_LOCAL_DEBUG === 'TRUE') return '/bigcommerce';
-  if (platform === 'bigcommerce') return window.origin;
+  // if (platform === 'bigcommerce') return window.origin;
   if (channelId === 1) return `https://store-${storeHash}.mybigcommerce.com`;
 
   return `https://store-${storeHash}-${channelId}.mybigcommerce.com`;
 };
 
-export const baseUrl = generateBcUrl();
+const baseUrl = generateBcUrl();
+console.log(baseUrl)
+
+export { baseUrl };

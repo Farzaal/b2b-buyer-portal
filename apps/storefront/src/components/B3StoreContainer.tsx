@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useLayoutEffect } from 'react';
+import { ReactNode, useContext, useEffect, useLayoutEffect } from 'react';
 
 import { GlobaledContext } from '@/shared/global';
 import { getBCStoreChannelId } from '@/shared/service/b2b';
@@ -35,7 +35,11 @@ export default function B3StoreContainer(props: B3StoreContainerProps) {
   } = useContext(GlobaledContext);
   const storeDispatch = useAppDispatch();
 
-  useLayoutEffect(() => {
+  // getBCStoreChannelId()
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log('Error ', err));
+    
+  useEffect(() => {
     const getStoreBasicInfo = async () => {
       if (
         window.location.pathname.includes('account.php') ||
@@ -94,10 +98,10 @@ export default function B3StoreContainer(props: B3StoreContainerProps) {
   }, []);
 
   const { children } = props;
-
+  console.log("storeEnabled === > ", storeEnabled)
   return (
     <>
-      {storeEnabled ? children : null}
+      {children}
       <B3PageMask />
     </>
   );

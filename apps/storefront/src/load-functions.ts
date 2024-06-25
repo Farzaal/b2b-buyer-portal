@@ -1,4 +1,5 @@
 import globalB3 from '@b3/global-b3';
+import { reactApp } from './react-setup'
 
 export const requestIdleCallbackFunction: typeof window.requestIdleCallback =
   window.requestIdleCallback
@@ -40,7 +41,7 @@ window.b2b = {
 export const initApp = async () => {
   if (window.b2b.initializationEnvironment.isInit) return;
 
-  await import('./react-setup');
+  await reactApp();
 };
 
 const clickLink = async (e: MouseEvent) => {

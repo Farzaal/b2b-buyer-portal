@@ -1,4 +1,4 @@
-import { lazy, useContext, useEffect, useState } from 'react';
+import { lazy, useContext, useEffect, useState, Suspense } from 'react';
 import { HashRouter } from 'react-router-dom';
 
 import GlobalDialog from '@/components/extraTip/GlobalDialog';
@@ -136,7 +136,7 @@ export default function App() {
       if (/action=reset_password/.test(search)) {
         openUrl = '/forgotpassword';
       }
-
+      console.log("setOpenPage === > ", openUrl)
       setOpenPage({
         isOpen: true,
         openUrl,
@@ -313,31 +313,33 @@ export default function App() {
 
     setCustomStyle(newStyle);
   }, [cssOverride?.css, CUSTOM_STYLES]);
-
+  
   return (
     <>
-      <HashRouter>
-        <div className="bundle-app">
-          <ThemeFrame
-            className={isOpen ? 'active-frame' : undefined}
-            fontUrl={FONT_URL}
-            customStyles={customStyles}
-          >
-            {isOpen ? (
-              <B3RenderRouter isOpen={isOpen} openUrl={openUrl} setOpenPage={setOpenPage} />
-            ) : null}
-          </ThemeFrame>
-        </div>
-      </HashRouter>
-      <B3MasquradeGobalTip setOpenPage={setOpenPage} isOpen={isOpen} />
-      <B3HoverButton
-        isOpen={isOpen}
-        productQuoteEnabled={productQuoteEnabled}
-        setOpenPage={setOpenPage}
-      />
-      <HeadlessController setOpenPage={setOpenPage} />
-      <B3GlobalTip />
-      <GlobalDialog />
+      <Suspense fallback={<div>Custom Loader</div>}>
+        <HashRouter>
+          <div className="bundle-app">
+            <ThemeFrame
+              className={isOpen ? 'active-frame' : undefined}
+              fontUrl={FONT_URL}
+              customStyles={customStyles}
+            >
+              {isOpen ? (
+                <B3RenderRouter isOpen={isOpen} openUrl={openUrl} setOpenPage={setOpenPage} />
+              ) : null}
+            </ThemeFrame>
+          </div>
+        </HashRouter>
+        <B3MasquradeGobalTip setOpenPage={setOpenPage} isOpen={isOpen} />
+        <B3HoverButton
+          isOpen={isOpen}
+          productQuoteEnabled={productQuoteEnabled}
+          setOpenPage={setOpenPage}
+        />
+        <HeadlessController setOpenPage={setOpenPage} />
+        <B3GlobalTip />
+        <GlobalDialog />
+      </Suspense>
     </>
   );
 }

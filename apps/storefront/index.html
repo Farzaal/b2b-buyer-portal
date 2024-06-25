@@ -20,6 +20,15 @@
         'dom.navUserLoginElement': '#headless-container',
         before_login_goto_page: '/',
       }
+      window.B3 = {
+        setting: {
+          channel_id: 1,
+          store_hash: '974oblbn5f',
+          platform: 'bigcommerce',
+          b2b_url: 'https://api.bigcommerce.com/stores/974oblbn5f/v3',
+          captcha_setkey: '',
+        },
+      };
     </script>
   </head>
   <body>
@@ -943,7 +952,7 @@
         $('#add-to-cart-wrapper').append(str)
       })
     </script>
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.1/vue.min.js"></script>
     <script>
       const inlineEvent = () => {
         // will log nothing by removed the methods from B3
@@ -962,8 +971,9 @@
           },
         },
       }
-
-      Vue.createApp(Headless).mount('#headless-container')
+      new Vue({
+        render: h => h(Headless),
+      }).$mount('#headless-container');
     </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
